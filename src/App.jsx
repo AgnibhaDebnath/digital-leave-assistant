@@ -1,11 +1,11 @@
-
+import Home from "./Pages/Home";
 
 function App() {
 
 
-  return (
-    <div className="text-blue-400">Agnibha</div>
-  )
+    return (
+        <Home />
+    );
 }
 
-export default App
+export default App;
