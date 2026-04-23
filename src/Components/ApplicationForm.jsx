@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RxCross2 } from "react-icons/rx"
 import { IoIosArrowDown } from "react-icons/io";
 import { FaCalendarDays } from "react-icons/fa6";
@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../App.css"
 import { generateApplication } from "../utils/applicationTemplate";
-const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview }) => {
+const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, handleScroll }) => {
     const [fullName, setFullName] = useState("")
     const [centerNo, setCenterNo] = useState("")
     const [reasonForLeave, setReasonForLeave] = useState("")
@@ -19,6 +19,23 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview }) =
     const [village, setVillage] = useState("")
     const [gramPanchayat, setGramPanchayat] = useState("")
 
+    useEffect(() => {
+        const data = localStorage.getItem("anganwadiFormData");
+
+        if (data) {
+            const parsedData = JSON.parse(data);
+
+            setFullName(parsedData.fullName || "");
+            setCenterNo(parsedData.centerNo || "");
+            setVillage(parsedData.village || "");
+            setGramPanchayat(parsedData.gramPanchayat || "");
+            setReasonForLeave(parsedData.reasonForLeave || "");
+            setReasonDetails(parsedData.reasonDetails || "");
+
+            setStartDate(parsedData.startDate ? new Date(parsedData.startDate) : null);
+            setEndDate(parsedData.endDate ? new Date(parsedData.endDate) : null);
+        }
+    }, []);
     const validate = () => {
         let newErrors = {};
 
@@ -49,12 +66,27 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview }) =
         return Object.keys(newErrors).length === 0;
     };
 
+
+
+
     const handleGenerate = (e) => {
         e.preventDefault();
 
         if (!validate()) return
 
         const text = generateApplication({ fullName, centerNo, village, gramPanchayat, startDate, endDate, reasonForLeave, reasonDetails });
+        const user_data = JSON.stringify({
+            fullName,
+            centerNo,
+            village,
+            gramPanchayat,
+            startDate,
+            endDate,
+            reasonForLeave,
+            reasonDetails
+        });
+
+        localStorage.setItem("anganwadiFormData", user_data);
         setApplicationPreview(text)
 
         setIsFormOpen(false)
@@ -67,13 +99,8 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview }) =
                 <div className="flex justify-end px-2 ">
                     <button onClick={() => {
                         setIsFormOpen(false)
-                        setCenterNo("")
-                        setFullName("")
                         setErrors({});
-                        setReasonForLeave("")
-                        setReasonDetails("")
-                        setStartDate(null)
-                        setEndDate(null)
+
                     }
 
                     } className="cursor-pointer"><RxCross2 size={25} strokeWidth={1} /></button>
@@ -213,7 +240,6 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview }) =
                         />
                     </div>
                     <button
-
                         type="submit"
                         onClick={handleGenerate}
                         className=" bg-green-100 text-green-500 md:bg-green-500 md:hover:bg-green-600 cursor-pointer font-[Inter] tracking-wide md:text-white py-1.5 rounded-md px-3 font-medium "
