@@ -1,5 +1,15 @@
+import { useState } from "react"
+import { FaEdit, FaCopy } from "react-icons/fa";
+const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationPreview, handleScroll }) => {
+    const [copied, setCopied] = useState(false)
+    const handleCopy = () => {
+        const fullApplication = `Date: ${application_date}\n\n${applicationPreview}`;
+        navigator.clipboard.writeText(fullApplication);
+        setCopied(true);
 
-const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationPreview }) => {
+        setTimeout(() => setCopied(false), 2000);
+    }
+
     const application_date = new Date().toLocaleDateString("en-IN", {
         day: "numeric",
         month: "long",
@@ -7,7 +17,7 @@ const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationP
     })
     return (
         <>
-            {applicationPreview && <div className="w-86 z-50 min-[430px]w-100 min-[513px]:w-120 min-[600px]:w-140 min-[683px]:w-160 min-[770px]:w-180 mx-auto mt-10 p-6 bg-white shadow-xl rounded-xl text-sm leading-relaxed absolute top-16 min-[600px]:top-18 left-1/2 transform -translate-x-1/2">
+            {applicationPreview && <div className="w-86 z-50 min-[430px]:w-100 min-[513px]:w-120 min-[600px]:w-140 min-[683px]:w-160 min-[770px]:w-180 mx-auto mt-10 p-6 bg-white shadow-xl rounded-xl text-sm leading-relaxed absolute top-16 min-[600px]:top-18 left-1/2 transform -translate-x-1/2">
 
                 <h3 className="text-2xl font-semibold text-center mb-3 font-[inter]">
                     Application Preview
@@ -19,17 +29,22 @@ const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationP
 
                     {applicationPreview}
                 </pre>
-                <div className="flex justify-center">
+                <div className="flex justify-end gap-4">
                     <button
                         onClick={() => {
                             setApplicationPreview("");
                             setIsFormOpen(true);
+                            handleScroll();
                         }}
 
-                        className="mt-4 bg-gray-400 font-[inter] font-medium text-white px-4 py-2 rounded-lg cursor-pointer text-base"
+                        className=" bg-gray-400 font-[inter] font-medium text-white px-4 py-1.5 rounded-lg cursor-pointer text-base "
                     >
-                        Edit Application
+                        <FaEdit className="inline mb-1" />  Edit Application
                     </button>
+
+                    <button onClick={handleCopy} className="bg-blue-500 text-white hover:bg-blue-600 px-3 py-1.5 rounded-xl font-[inter] cursor-pointer"><FaCopy className="inline mb-1 mr-1" />{!copied ? "Copy" : "Copied"}
+                    </button>
+
                 </div>
             </div >}
         </>
