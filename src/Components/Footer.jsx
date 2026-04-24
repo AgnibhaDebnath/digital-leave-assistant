@@ -1,6 +1,6 @@
 const Footer = ({ applicationPreview }) => {
     return (
-        <footer className={`bg-gray-900 text-white mt-10 py-1`}>
+        <footer className={`bg-gray-900 text-white py-1`}>
 
             <div className="max-w-6xl mx-auto px-4 flex flex-col items-center text-center gap-2 font-[inter]">
 
