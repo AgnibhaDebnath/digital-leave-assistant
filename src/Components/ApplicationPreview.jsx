@@ -66,7 +66,7 @@ const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationP
                         <FaEdit className="inline mb-1" />  Edit Application
                     </button>
 
-                    <button onClick={handleCopy} className="bg-blue-500 text-white hover:bg-blue-600 px-3 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs  min-[516px]:text-base"><FaCopy className="inline mb-1 mr-1" />{!copied ? "Copy" : "Copied"}
+                    <button onClick={handleCopy} className="bg-blue-500 text-white hover:bg-blue-600 px-2.5 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs  min-[516px]:text-base"><FaCopy className="inline mb-1 mr-1" />{!copied ? "Copy" : "Copied"}
                     </button>
                     <button className=" bg-green-500 hover:bg-green-600 text-white px-2.5 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs  min-[513px]:text-base" onClick={handleDownload}>
                         Download pdf
