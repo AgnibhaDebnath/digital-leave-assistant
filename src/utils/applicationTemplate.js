@@ -7,7 +7,7 @@ export function generateApplication(data) {
     startDate,
     endDate,
     reasonForLeave,
-    reasonDetails,
+    
     
   } = data;
 
@@ -32,8 +32,29 @@ let dateText = "";
                 month: "long",
                 year: "numeric"
             })} `;
-    }
-let reasonText = reasonForLeave ? reasonForLeave : reasonDetails;
+  }
+  const getReasonText = (reason) => {
+  switch (reason) {
+    case "illness":
+      return "health issues";
+    case "family function":
+      return "an important family function";
+    case "family emergency":
+      return "a family emergency";
+    case "personal work":
+      return "personal commitments";
+    case "child care":
+      return "child care responsibilities";
+    case "medical appointment":
+      return "a scheduled medical appointment";;
+    case "travel":
+      return "travel requirements";
+    default:
+      return "";
+      
+  }
+};
+  let reasonText = getReasonText(reasonForLeave);
 
   let address = "";
 
@@ -54,9 +75,9 @@ Subject: Application for Leave
 
 Respected Sir/Madam,
 
-I, ${fullName}, working at Anganwadi Center No. ${centerNo}, ${address.toLowerCase()}would like to request leave ${dateText} due to ${reasonText}.
+I, ${fullName}, working at Anganwadi Center No. ${centerNo}, ${address}would like to request leave ${dateText} due to ${reasonText}.
 
-${isSameDate ?"kinldy grant me leave fot the day.":"Kindly grant me leave for the mentioned period."}
+${isSameDate ?"kinldy grant me leave for the day.":"Kindly grant me leave for the mentioned period."}
 
 Thank you.
 
