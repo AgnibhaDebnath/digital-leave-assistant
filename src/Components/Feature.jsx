@@ -2,7 +2,7 @@ import { FaBolt, FaCheckCircle, FaSmile } from "react-icons/fa";
 
 const Feature = () => {
     return (
-        <section className="pt-30 pb-10 bg-white">
+        <section className="pt-20 md:pt-30 pb-10 bg-white">
 
             <div className="flex flex-col gap-3">
                 <div className="flex justify-center">
