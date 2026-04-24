@@ -36,7 +36,7 @@ const Home = () => {
         <>
 
             <Navbar />
-            <div ref={formRef} className={`relative ${applicationPreview ? "h-210" : isFormOpen ? "h-180" : "h-100"} pb-10`}>
+            <div ref={formRef} className={`relative ${applicationPreview ? "h-210" : isFormOpen ? "h-180" : "h-auto"} pb-10`}>
                 <Hero handleScroll={handleScroll} setIsFormOpen={setIsFormOpen} />
 
                 <ApplicationForm handleScroll={handleScroll} isFormOpen={isFormOpen} setApplicationPreview={setApplicationPreview} setIsFormOpen={setIsFormOpen} />
