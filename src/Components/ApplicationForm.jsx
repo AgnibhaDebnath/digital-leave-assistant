@@ -10,7 +10,7 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
     const [fullName, setFullName] = useState("")
     const [centerNo, setCenterNo] = useState("")
     const [reasonForLeave, setReasonForLeave] = useState("")
-    const [reasonDetails, setReasonDetails] = useState("");
+
     const [application, setApplication] = useState("");
     const [startDate, setStartDate] = useState(null)
     const [errors, setErrors] = useState({})
@@ -30,7 +30,7 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
             setVillage(parsedData.village || "");
             setGramPanchayat(parsedData.gramPanchayat || "");
             setReasonForLeave(parsedData.reasonForLeave || "");
-            setReasonDetails(parsedData.reasonDetails || "");
+
 
             setStartDate(parsedData.startDate ? new Date(parsedData.startDate) : null);
             setEndDate(parsedData.endDate ? new Date(parsedData.endDate) : null);
@@ -45,9 +45,7 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
         if (!centerNo.trim()) {
             newErrors.CenterNoError = "Center number is required";
         }
-        if (reasonForLeave == "other" && (!reasonDetails.trim())) {
-            newErrors.ReasonDetailsError = "Please write reason details";
-        }
+
 
         if (!startDate) {
             newErrors.StartDateError = "Start date is required";
@@ -74,7 +72,7 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
 
         if (!validate()) return
 
-        const text = generateApplication({ fullName, centerNo, village, gramPanchayat, startDate, endDate, reasonForLeave, reasonDetails });
+        const text = generateApplication({ fullName, centerNo, village, gramPanchayat, startDate, endDate, reasonForLeave });
         const user_data = JSON.stringify({
             fullName,
             centerNo,
@@ -83,7 +81,7 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
             startDate,
             endDate,
             reasonForLeave,
-            reasonDetails
+
         });
 
         localStorage.setItem("anganwadiFormData", user_data);
@@ -193,24 +191,12 @@ const ApplicationForm = ({ isFormOpen, setIsFormOpen, setApplicationPreview, han
                             <option value="family function">Family Function</option>
                             <option value="medical appointment">Medical Appointment</option>
                             <option value="travel">Travel</option>
-                            <option value="other">Other</option>
+
                         </select>
                         <IoIosArrowDown className="absolute top-2.5  right-3 pointer-events-none text-gray-600" size={22} strokeWidth={5} />
                         {errors.ReasonError && <p className="text-red-500 pl-3 w-70 min-[410px]:w-80">{errors.ReasonError}</p>}
                     </div>
-                    {reasonForLeave == "other" && <div className="w-70 min-[490px]:w-80">
-                        <textarea value={reasonDetails} onChange={(e) => {
-                            const only_letter = /^[A-Za-z\s]*$/;
-                            const value = e.target.value
-                            if (only_letter.test(value)) {
-                                setReasonDetails(value)
-                                setErrors(prev => ({ ...prev, ReasonDetailsError: "" }))
-                            }
-                        }} className="border border-gray-500 shadow-sm px-2 pl-4 font-medium py-1.5 rounded-2xl w-full text-gray-600 font-[Inter] focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" placeholder="Reason for leave">
 
-                        </textarea>
-                        {errors.ReasonDetailsError && <p className="text-red-500 pl-3 w-70 min-[410px]:w-80">{errors.ReasonDetailsError}</p>}
-                    </div>}
                     <div className="w-70 min-[490px]:w-80">
                         <input
                             placeholder="Village (Optional)"
