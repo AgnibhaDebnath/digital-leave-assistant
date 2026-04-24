@@ -61,14 +61,14 @@ const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationP
                             handleScroll();
                         }}
 
-                        className=" bg-gray-400 font-[inter] font-medium text-white px-2.5 min-[430px]:px-4 py-1.5 rounded-lg cursor-pointer text-xs min-[430px]:text-sm min-[516px]:text-base"
+                        className=" bg-gray-400 font-[inter] font-medium text-white px-2.5 min-[430px]:px-4 py-1.5 rounded-lg cursor-pointer text-xs min-[516px]:text-base"
                     >
                         <FaEdit className="inline mb-1" />  Edit Application
                     </button>
 
-                    <button onClick={handleCopy} className="bg-blue-500 text-white hover:bg-blue-600 px-3 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs min-[430px]:text-sm min-[516px]:text-base"><FaCopy className="inline mb-1 mr-1" />{!copied ? "Copy" : "Copied"}
+                    <button onClick={handleCopy} className="bg-blue-500 text-white hover:bg-blue-600 px-3 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs  min-[516px]:text-base"><FaCopy className="inline mb-1 mr-1" />{!copied ? "Copy" : "Copied"}
                     </button>
-                    <button className=" bg-green-500 hover:bg-green-600 text-white px-2.5 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs min-[430px]:text-sm min-[516px]:text-base" onClick={handleDownload}>
+                    <button className=" bg-green-500 hover:bg-green-600 text-white px-2.5 min-[430px]:px-4 py-1.5 rounded-xl font-[inter] cursor-pointer text-xs  min-[513px]:text-base" onClick={handleDownload}>
                         Download pdf
                     </button>
 
