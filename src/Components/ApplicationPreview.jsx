@@ -53,7 +53,7 @@ const ApplicationPreview = ({ applicationPreview, setIsFormOpen, setApplicationP
                         {applicationPreview}
                     </pre>
                 </div>
-                <div className="flex max-[370px]:justify-center justify-end gap-3 min-[516px]:gap-4">
+                <div className="flex max-[370px]:justify-between justify-end gap-2 min-[516px]:gap-4">
                     <button
                         onClick={() => {
                             setApplicationPreview("");
