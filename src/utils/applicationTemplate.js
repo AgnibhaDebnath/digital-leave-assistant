@@ -58,8 +58,8 @@ let dateText = "";
 
   let address = "";
 
-  if (village) address += `${village}, `;
-  if (gramPanchayat) address += `${gramPanchayat}, `;
+  if (village) address += `${village},`;
+  if (gramPanchayat) address += `  ${gramPanchayat},`;
 
 
   return `
@@ -75,7 +75,7 @@ Subject: Application for Leave
 
 Respected Sir/Madam,
 
-I, ${fullName}, working at Anganwadi Center No. ${centerNo}, ${address}would like to request leave ${dateText}due to ${reasonText}.
+I, ${fullName}, working at Anganwadi Center No. ${centerNo}, ${address} would like to request leave ${dateText}due to ${reasonText}.
 
 ${isSameDate ?"kindly grant me leave for the day.":"Kindly grant me leave for the mentioned period."}
 
