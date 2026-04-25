@@ -58,8 +58,12 @@ let dateText = "";
 
   let address = "";
 
-  if (village) address += `${village},`;
-  if (gramPanchayat) address += `  ${gramPanchayat},`;
+let addressParts = [];
+
+if (village) addressParts.push(village.trim());
+if (gramPanchayat) addressParts.push(gramPanchayat.trim());
+
+address = addressParts.join(", ");
 
 
   return `
@@ -75,9 +79,9 @@ Subject: Application for Leave
 
 Respected Sir/Madam,
 
-I, ${fullName}, working at Anganwadi Center No. ${centerNo}, ${address} would like to request leave ${dateText}due to ${reasonText}.
+I, ${fullName.trim()}, working at Anganwadi Center No. ${centerNo}, ${address}, would like to request leave ${dateText}due to ${reasonText}.
 
-${isSameDate ?"kindly grant me leave for the day.":"Kindly grant me leave for the mentioned period."}
+${isSameDate ?"Kindly grant me leave for the day.":"Kindly grant me leave for the mentioned period."}
 
 Thank you.
 
